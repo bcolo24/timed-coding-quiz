@@ -7,20 +7,23 @@
     <link rel ="stylesheet" href ="assets/styles.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="startScreen">
         <h1>Coding Quiz Challenge</h1>
         <h2>Test your coding knowledge and see if you can beat the timer. <br> Each question you get wrong decreases the time on the clock!</h2>
-        <button id="start-btn" onclick="startQuiz()">Start</button>
-
-        <div id= "quiz" style="display:none;"> 
-            <p id="question">Question 1</p>
-            <ul id="answers1">
-                <list>Data Orientation Model</list>
-                <list>Document Object Model</list>
-            </ul>
+        <button id="start-btn">Start</button>
+    </div>
+    <div class="container" id= "quiz" style="display:none;"> 
+        <p id="question">Question 1</p>
+            <ol id="answers">
+                <!-- <button>Orientation Model</button>
+                <li>Document Object Model</li>
+                <li>Document Orientation Model</list>
+                <li>Data Only Model</li> -->
+            </ol>
+            <!-- <button id="next" onclick="nextQuestion()">Next</button> -->
         </div>
 
     </div>
-    <script src="script.js"></script>
+<script src="./assets/script.js"></script>    
 </body>
 </html>
