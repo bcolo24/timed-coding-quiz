@@ -2,46 +2,46 @@ const questions = [
     {
         question: "What does DOM stand for?",
         answers: [
-            { text: "Data Orientation Model", correct: false},
-            { text: "Document Object Model", correct: true},
-            { text: "Document Orientation Model", correct: false},
-            { text: "Data Only Model", correct: false},
+            { text: "A. Data Orientation Model", correct: false},
+            { text: "B. Document Object Model", correct: true},
+            { text: "C. Document Orientation Model", correct: false},
+            { text: "D. Data Only Model", correct: false},
         ]
     },
     {
         question: "What command allows you to create a directory?",
         answers: [
-            { text: "touch", correct: false},
-            { text: "mv", correct: false},
-            { text: "cd", correct: false},
-            { text: "mkdir", correct: true},
+            { text: "A. touch", correct: false},
+            { text: "B. mv", correct: false},
+            { text: "C. cd", correct: false},
+            { text: "D. mkdir", correct: true},
         ]
     },
     {
         question: "Which of the following flex properties is associated with a child element?",
         answers: [
-            { text: "justify-content", correct: false},
-            { text: "flew-grow", correct: true},
-            { text: "align-items", correct: false},
-            { text: "flex-flow", correct: false},
+            { text: "A. justify-content", correct: false},
+            { text: "B. flew-grow", correct: true},
+            { text: "C. align-items", correct: false},
+            { text: "D. flex-flow", correct: false},
         ]
     },
     {
         question: "Which of the following goes inside of an <a> tag?",
         answers: [
-            { text: "href=", correct: true},
-            { text: "rel=", correct: false},
-            { text: "alt=", correct: false},
-            { text: "src=", correct: false},
+            { text: "A. href=", correct: true},
+            { text: "B. rel=", correct: false},
+            { text: "C. alt=", correct: false},
+            { text: "D. src=", correct: false},
         ]
     },
     {
         question: "Which of the following is an example of a pseudo element?",
         answers: [
-            { text: ":hover", correct: false},
-            { text: "nth-child", correct: false},
-            { text: "::after", correct: true},
-            { text: "focus", correct: false},
+            { text: "A. :hover", correct: false},
+            { text: "B. nth-child", correct: false},
+            { text: "C. ::after", correct: true},
+            { text: "D. focus", correct: false},
         ]
     }
 ];
@@ -57,8 +57,6 @@ const startScreen = document.getElementById("startScreen");
 function startQuiz() {
     // Hide the title screen and show the quiz
     startScreen.remove();
-    // quizScreen.append(questions);
-    // quiz.style.display = "block";
     quizScreen.style.display = "block";
     currentQuestion = 0;
     showQuestion(currentQuestion);
@@ -90,32 +88,76 @@ function showQuestion(questionIndex) {
         question.answers.forEach((answer, index) => {
             const answerButton = document.createElement("button");
             answerButton.textContent = answer.text;
-            answerButton.addEventListener("click", () => checkAnswer(index));
+            answerButton.classList.add("answer-btn");
+            answerButton.addEventListener("click", () => chooseAnswer(index));
             answersElement.appendChild(answerButton);
         });
     }
 }
 
-function checkAnswer(selectedIndex) {
-    // Add your logic for checking the answer here
-    // You can compare the selected answer with the correct answer
 
-    if (currentQuestion < questions.length - 1) {
-        currentQuestion++;
-        showQuestion(currentQuestion);
-    } else {
-        // Quiz is finished
-        // questionElement.textContent = "Quiz complete!";
-        // answersElement.innerHTML = "";
-        // nextButton.style.display = "none";
+// element.setAttribute("id", "hello") to change button appearance
+
+
+function chooseAnswer(selectedIndex) {
+     if (currentQuestion < questions.length - 1) {
+         currentQuestion++;
+         showQuestion(currentQuestion);
+
+     } else {
+        
     }
 }
 
-// Auto-progression to the next question without a "Next" button
-// for (let i = 0; i < questions.length; i++) {
-//     (function (questionIndex) {
-//         setTimeout(function () {
-//             showQuestion(questionIndex);
-//         }, i * 5000); // Adjust the delay (5000 milliseconds = 5 seconds) between questions
-//     })(i);
+function chooseAnswer(selectedIndex) {
+    checkAnswer(selectedIndex);
+}
+
+function checkAnswer(selectedIndex) {
+    const currentQuestionObj = questions[currentQuestion];
+    const selectedAnswer = currentQuestionObj.answers[selectedIndex];
+    
+    if (selectedAnswer.correct) {
+        // Correct answer handling
+        showFeedback(true); // Show "Correct" feedback
+    } else {
+        // Incorrect answer handling
+        showFeedback(false); // Show "Incorrect" feedback
+    }
+
+    // Automatically move to the next question after a short delay
+    setTimeout(() => {
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            showQuestion(currentQuestion);
+            hideFeedback();
+        } else {
+            // Handle end of the quiz
+            questionElement.textContent = "Quiz complete!";
+            answersElement.innerHTML = "";
+            nextButton.style.display = "none";
+        }
+    }, 500); // Adjust the delay (2000 milliseconds = 2 seconds) as needed
+}
+
+
+function showFeedback(isCorrect) {
+    const feedbackElement = document.createElement("p");
+    feedbackElement.textContent = isCorrect ? "Correct!" : "Incorrect.";
+    feedbackElement.classList.add(isCorrect ? "correct-feedback" : "incorrect-feedback");
+    answersElement.appendChild(feedbackElement);
+}
+
+// function hideFeedback() {
+//     const feedbackElements = answersElement.querySelectorAll("p.correct-feedback, p.incorrect-feedback");
+//     feedbackElements.forEach((element) => {
+//         element.style.display = "none";
+//     });
 // }
+
+
+
+
+
+
+
