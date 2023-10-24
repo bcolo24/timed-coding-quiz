@@ -92,3 +92,56 @@
     background-color: var(--blue);
 }
 
+#countdown {
+    color: black;
+    font-size: 30px;
+}
+
+#timer {
+    text-align: right;
+    font-size: 30px;
+    margin: 50px;
+}
+
+#endScreen {
+    border: 10px dotted #f18b8b;
+    background-color: var(--blue);
+    border-radius: 30px;
+    text-align: center;
+    font-size: 40px;
+    margin: 150px;
+    padding: 35px;
+    color: white;
+}
+
+#endScreen p {
+    background-color: var(--blue);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    margin: 0px;
+}
+
+#high-score-form {
+    font-size: 25px;
+    background-color: var(--blue);
+}
+
+#high-score-form h2 {
+    background-color: var(--blue);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    
+}
+
+#high-score-form input {
+    font-size: 23px;
+    background-color: white;
+}
+#high-score-form button {
+    font-size: 20px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    background-color: white ;
+}
+
+#high-score-form button:hover {
+    background-color: #d1cdcd;
+}
+

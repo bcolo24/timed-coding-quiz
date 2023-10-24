@@ -47,19 +47,40 @@ const questions = [
 ];
 
 let currentQuestion = -1; // Initialize with -1 to indicate the title screen
+let timer;
+let timeLeft = 60;
 const startButton = document.getElementById("start-btn");
 const quizScreen = document.getElementById("quiz");
 const questionElement = document.getElementById("question");
 const answersElement = document.getElementById("answers");
 const nextButton = document.getElementById("next");
 const startScreen = document.getElementById("startScreen");
+const endScreen= document.getElementById("endScreen");
 
 function startQuiz() {
     // Hide the title screen and show the quiz
     startScreen.remove();
+    endScreen.style.display = "none";
     quizScreen.style.display = "block";
     currentQuestion = 0;
     showQuestion(currentQuestion);
+    startTimer();
+}
+endScreen.style.display = "none";
+
+function startTimer() {
+    timer = setInterval(function (){
+        timeLeft--;
+        document.getElementById("countdown").textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            quizScreen.style.display = "none";
+            endScreen.style.display = "block";
+            questionElement.style.display = "none";
+            answersElement.style.display = "none";
+        }
+    }, 1000);
 }
 
 startButton.addEventListener("click", function () {
@@ -123,6 +144,7 @@ function checkAnswer(selectedIndex) {
     } else {
         // Incorrect answer handling
         showFeedback(false); // Show "Incorrect" feedback
+        timeLeft -= 10;
     }
 
     // Automatically move to the next question after a short delay
@@ -130,14 +152,15 @@ function checkAnswer(selectedIndex) {
         currentQuestion++;
         if (currentQuestion < questions.length) {
             showQuestion(currentQuestion);
-            hideFeedback();
+            // hideFeedback();
         } else {
             // Handle end of the quiz
-            questionElement.textContent = "Quiz complete!";
-            answersElement.innerHTML = "";
-            nextButton.style.display = "none";
+            endScreen.style.display = "block";
+            questionElement.style.display = "none";
+            answersElement.style.display = "none";
+            
         }
-    }, 500); // Adjust the delay (2000 milliseconds = 2 seconds) as needed
+    }, 500); // seconds in milliseconds
 }
 
 
@@ -148,12 +171,6 @@ function showFeedback(isCorrect) {
     answersElement.appendChild(feedbackElement);
 }
 
-// function hideFeedback() {
-//     const feedbackElements = answersElement.querySelectorAll("p.correct-feedback, p.incorrect-feedback");
-//     feedbackElements.forEach((element) => {
-//         element.style.display = "none";
-//     });
-// }
 
 
 

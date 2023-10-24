@@ -7,6 +7,8 @@
     <link rel ="stylesheet" href ="assets/styles.css">
 </head>
 <body>
+    
+    <div id="timer">Time: <span id="countdown">60</span> seconds</div>
     <div class="container" id="startScreen">
         <h1>Coding Quiz Challenge</h1>
         <h2>Test your coding knowledge and see if you can beat the timer. <br> Each question you get wrong decreases the time on the clock!</h2>
@@ -24,6 +26,21 @@
         </p>
     <div class="correct-feedback incorrect-feedback"></div>
     </div>
-<script src="./assets/script.js"></script>    
+    
+    
+  
 </body>
+
+<div id="endScreen">
+     <p>Submit your Score!</p> 
+
+
+<form id="high-score-form">
+    <h2>Enter Your Initials</h2>
+    <input type="text" id="initials" required>
+    <button type="submit">Submit</button>
+</form> 
+</div> 
+
+<script src="./assets/script.js"></script>  
 </html>
