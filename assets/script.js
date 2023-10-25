@@ -49,6 +49,9 @@ const questions = [
 let currentQuestion = -1; // Initialize with -1 to indicate the title screen
 let timer;
 let timeLeft = 60;
+let userScore = 0;
+let timeTaken = 0;
+
 const startButton = document.getElementById("start-btn");
 const quizScreen = document.getElementById("quiz");
 const questionElement = document.getElementById("question");
@@ -56,6 +59,9 @@ const answersElement = document.getElementById("answers");
 const nextButton = document.getElementById("next");
 const startScreen = document.getElementById("startScreen");
 const endScreen= document.getElementById("endScreen");
+const highScoreForm = document.getElementById("high-score-form");
+const playerNameInput = document.getElementById("initials");
+
 
 function startQuiz() {
     // Hide the title screen and show the quiz
@@ -73,12 +79,17 @@ function startTimer() {
         timeLeft--;
         document.getElementById("countdown").textContent = timeLeft;
 
-        if (timeLeft <= 0) {
+        if (timeLeft <= 0 || currentQuestion === questions.length) {
             clearInterval(timer);
             quizScreen.style.display = "none";
             endScreen.style.display = "block";
             questionElement.style.display = "none";
             answersElement.style.display = "none";
+
+            userScore = timeLeft; // You can adjust the scoring logic as needed
+
+            // Display the user's score
+            document.getElementById("score-value").textContent = userScore;
         }
     }, 1000);
 }
@@ -156,9 +167,6 @@ function checkAnswer(selectedIndex) {
         } else {
             // Handle end of the quiz
             endScreen.style.display = "block";
-            questionElement.style.display = "none";
-            answersElement.style.display = "none";
-            
         }
     }, 500); // seconds in milliseconds
 }
@@ -171,6 +179,20 @@ function showFeedback(isCorrect) {
     answersElement.appendChild(feedbackElement);
 }
 
+highScoreForm.addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent the form from actually submitting
+
+    const playerName = playerNameInput.value;
+    const playerScore = userScore = timeLeft; 
+
+     // Store the high score in local storage
+     const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+     highScores.push({ name: playerName, score: playerScore });
+     localStorage.setItem("highScores", JSON.stringify(highScores));
+    
+         // Redirect to a high scores page or display high scores
+    window.location.href = "high-scores.html"; // Example: Redirect to a high scores page
+});
 
 
 
