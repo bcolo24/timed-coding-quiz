@@ -1,11 +1,13 @@
 * {
     background-color: beige;
 }
+
 :root {
     --blue: #29454c;
 }
+
 .container {
-    margin: 300px;
+    margin: 7%;
     padding: 10px;
     text-align: center;
     color: white;
@@ -15,10 +17,12 @@
     border-radius: 25px;
     text-shadow: 5px 5px 5px black;
 }
+
 .container h1 {
    font-size: 50px;
    background-color:var(--blue);
 }
+
 .container h2 {
     background-color: var(--blue);
     font-size: 25px;
@@ -71,14 +75,12 @@
     font-size: 25px;
     margin: 4px 2px;
     cursor: pointer;
-    text-shadow: 2px 2px 4px rgb(76, 76, 76);
+    text-shadow: 2px 2px 4px #4c4c4c;
 }
 
 #start-btn:hover {
-    /* border: 5px solid #fbff00; */
     border: 5px solid #ecbfbf;
     border-style: inset;
-    /* box-shadow: 10px inset; */
 }
 
 #question {
@@ -105,13 +107,12 @@
 
 #endScreen {
     border: 10px dotted #acd6c9;
-    background-color: var(--blue);
+    background-color:var(--blue);
     border-radius: 30px;
     text-align: center;
     font-size: 40px;
     margin: 150px;
     padding: 35px;
-    /* color: white; */
 }
 
 #endScreen p {
@@ -137,10 +138,12 @@
     font-size: 23px;
     background-color: white;
 }
+
 #high-score-form button {
     font-size: 20px;
     box-shadow: 0 8px 16px 0 #00000033, 0 6px 20px 0 #00000030;
     background-color: white ;
+    cursor: pointer;
 }
 
 #high-score-form button:hover {
@@ -148,6 +151,7 @@
 }
 
 #user-score {
+    
     background-color: var(--blue);
     text-align: center;
     font-size: 30px;
@@ -156,4 +160,29 @@
 
 #score-value {
     background-color: var(--blue);
+}
+
+#high-scores {
+    display: none;
+   background-color: black;
+}
+
+#high-score-list {
+    list-style-type: none;
+}
+
+#high-score-list li { 
+    text-align: left;
+    font-size: 40px;
+    margin-right: 42.5%;
+    margin-left:42.5%;
+    color:#ffffff;
+}
+
+#high-score-list li:nth-child(odd){
+   background-color: var(--blue);
+}
+
+#high-score-list li:nth-child(even){
+    background-color:#89a2a8cc;
 }

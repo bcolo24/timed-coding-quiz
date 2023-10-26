@@ -7,41 +7,43 @@
     <link rel ="stylesheet" href ="assets/styles.css">
 </head>
 <body>
+    <!-- Timer -->
+    <section id="timer">Time: <span id="countdown">60</span> seconds</section>
     
-    <div id="timer">Time: <span id="countdown">60</span> seconds</div>
-    
+    <!--Opening screen of the app -->
     <div class="container" id="startScreen">
         <h1>Coding Quiz Challenge</h1>
         <h2>Test your coding knowledge and see if you can beat the timer. <br> Each question you get wrong decreases the time on the clock!</h2>
         <button id="start-btn">Start</button>
     </div>
+
+    <!-- Container for the questiosn and answers -->
     <div class="container" id= "quiz" style="display:none;"> 
-        <p id="question">Question 1<p>
+        <p id="question"><p>
             <ol id="answers">
-                <!-- <button>Orientation Model</button>
-                <li>Document Object Model</li>
-                <li>Document Orientation Model</list>
-                <li>Data Only Model</li> -->
+                <!--Answer options will display here-->
             </ol>
-            <!-- <button id="next" onclick="nextQuestion()">Next</button> -->
         </p>
     <div class="correct-feedback incorrect-feedback"></div>
     </div>
-    
-    
-  
-</body>
 
-<div id="endScreen">
-    <p id="user-score">Your Score: <span id="score-value">0</span></p>
-<form id="high-score-form">
-    <h2>Enter Your Initials to Submit Your Score!</h2>
-    <input type="text" id="initials" required>
-    <button type="submit">Submit</button>
-</form> 
-</div> 
+<!-- When quiz ends -->
+<section id="endScreen">
+    <p id="user-score">Your Score: <span id="score-value"></span></p>
 
+    <form id="high-score-form">
+        <h2>Enter Your Initials to Submit Your Score!</h2>
+        <input type="text" id="initials" required>
+        <button type="submit">Submit</button>
+    </form> 
+</section> 
 
+<!-- High scores array and displayed list -->
+<section id="high-scores"></section>
+<ol id ="high-score-list">
+    <!-- High Scores will display here -->
+</ol>
 
 <script src="./assets/script.js"></script>  
+</body>
 </html>

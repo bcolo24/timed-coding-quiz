@@ -61,7 +61,8 @@ const startScreen = document.getElementById("startScreen");
 const endScreen= document.getElementById("endScreen");
 const highScoreForm = document.getElementById("high-score-form");
 const playerNameInput = document.getElementById("initials");
-
+const highScoreList = document.getElementById("high-score-list");
+const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
 function startQuiz() {
     // Hide the title screen and show the quiz
@@ -73,6 +74,8 @@ function startQuiz() {
     startTimer();
 }
 endScreen.style.display = "none";
+highScoreList.style.display="none";
+
 
 function startTimer() {
     timer = setInterval(function (){
@@ -85,11 +88,10 @@ function startTimer() {
             endScreen.style.display = "block";
             questionElement.style.display = "none";
             answersElement.style.display = "none";
-
-            userScore = timeLeft; // You can adjust the scoring logic as needed
-
+            userScore = timeLeft;
             // Display the user's score
             document.getElementById("score-value").textContent = userScore;
+            
         }
     }, 1000);
 }
@@ -127,10 +129,6 @@ function showQuestion(questionIndex) {
     }
 }
 
-
-// element.setAttribute("id", "hello") to change button appearance
-
-
 function chooseAnswer(selectedIndex) {
      if (currentQuestion < questions.length - 1) {
          currentQuestion++;
@@ -163,9 +161,10 @@ function checkAnswer(selectedIndex) {
         currentQuestion++;
         if (currentQuestion < questions.length) {
             showQuestion(currentQuestion);
-            // hideFeedback();
+
         } else {
-            // Handle end of the quiz
+            //End of the quiz
+            quizScreen.style.display= "none";
             endScreen.style.display = "block";
         }
     }, 500); // seconds in milliseconds
@@ -179,24 +178,34 @@ function showFeedback(isCorrect) {
     answersElement.appendChild(feedbackElement);
 }
 
+function displayHighScores() {
+    highScoreList.innerHTML = "";
+    const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+    highScores.sort((a, b) => b.score - a.score); // high scores in descending order
+    highScores.forEach((score, index) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${index + 1}. ${score.name} - ${score.score}`;
+        highScoreList.appendChild(listItem);
+    });
+}
+
 highScoreForm.addEventListener("submit", function (e) {
     e.preventDefault(); // Prevent the form from actually submitting
 
+    endScreen.style.display ="none";
     const playerName = playerNameInput.value;
-    const playerScore = userScore = timeLeft; 
-
+    const playerScore = userScore; 
+    highScoreList.style.display = "block";
      // Store the high score in local storage
-     const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-     highScores.push({ name: playerName, score: playerScore });
-     localStorage.setItem("highScores", JSON.stringify(highScores));
-    
-         // Redirect to a high scores page or display high scores
-    window.location.href = "high-scores.html"; // Example: Redirect to a high scores page
-});
-
-
-
-
-
-
-
+    const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+    // Add the new high score
+    highScores.push({ name: playerName, score: playerScore });
+    //Store in local storage
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    displayHighScores();
+     // Show the high scores container
+ });
+ 
+ 
+ // Call this function to display the initial high scores
+ displayHighScores();
